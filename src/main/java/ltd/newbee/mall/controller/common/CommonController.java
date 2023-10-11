@@ -10,6 +10,7 @@ package ltd.newbee.mall.controller.common;
 
 import com.wf.captcha.SpecCaptcha;
 import com.wf.captcha.base.Captcha;
+import jakarta.servlet.ServletOutputStream;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ltd.newbee.mall.common.Constants;
@@ -45,7 +46,11 @@ public class CommonController {
         httpServletRequest.getSession().setAttribute("verifyCode", captcha.text().toLowerCase());
 
         // 输出图片流
+        ServletOutputStream outputStream = httpServletResponse.getOutputStream();
         captcha.out(httpServletResponse.getOutputStream());
+        outputStream.flush();
+
+
     }
 
     @GetMapping("/common/mall/kaptcha")
