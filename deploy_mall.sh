@@ -48,14 +48,14 @@ unzip -o upload.zip -d ~/
 # 启动 springboot应用
 echo "--->开始启动"
 
-#nohup java -Xms512m -Xmx512m -Duser.timezone=GMT+8 -Dfile.encoding=utf-8 \
-#  -javaagent:./skywalking-agent/skywalking-agent.jar \
-#  -Dskywalking.agent.service_name=$app_name \
-#  -Dskywalking.collector.backend_service=$DB_IP:11800 \
-#  -jar ./target/newbee-mall-plus.jar --server.port=$export_port \
-#  >>/dev/null 2>&1 &
-java -Xms512m -Xmx512m -Duser.timezone=GMT+8 -Dfile.encoding=utf-8 \
+nohup java -Xms512m -Xmx512m -Duser.timezone=GMT+8 -Dfile.encoding=utf-8 \
   -javaagent:./skywalking-agent/skywalking-agent.jar \
   -Dskywalking.agent.service_name=$app_name \
   -Dskywalking.collector.backend_service=$DB_IP:11800 \
-  -jar ./target/newbee-mall-plus.jar --server.port=$export_port
+  -jar ./target/newbee-mall-plus.jar --server.port=$export_port \
+  >>/dev/null 2>&1 &
+#java -Xms512m -Xmx512m -Duser.timezone=GMT+8 -Dfile.encoding=utf-8 \
+#  -javaagent:./skywalking-agent/skywalking-agent.jar \
+#  -Dskywalking.agent.service_name=$app_name \
+#  -Dskywalking.collector.backend_service=$DB_IP:11800 \
+#  -jar ./target/newbee-mall-plus.jar --server.port=$export_port
