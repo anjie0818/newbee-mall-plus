@@ -1,0 +1,15 @@
+# 环境搭建步骤
+## 【前置准备】安装docker、java、mvn
+* 执行shell
+## 监控+DB
+* 创建挂在目录
+  * /data/mysql/data
+  * /data/influxdb/data
+  * /data/elasticsearch/data
+* 导入mysql数据
+## 应用
+* 执行shell
+## nginx
+* 执行shell
+* 配置反向代理
+## 肉鸡

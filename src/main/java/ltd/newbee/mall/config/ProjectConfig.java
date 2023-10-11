@@ -37,6 +37,8 @@ public class ProjectConfig {
     }
 
     public static String getFileUploadPath() {
+        String homeDir = System.getProperty("user.home");
+        fileUploadPath = fileUploadPath.replaceFirst("^~", homeDir);
         return fileUploadPath;
     }
 

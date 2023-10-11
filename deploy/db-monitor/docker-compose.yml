@@ -1,0 +1,121 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345678
+      MYSQL_DATABASE: newbee_mall_plus_db
+      MYSQL_USER: test
+      MYSQL_PASSWORD: 12345678
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+  redis:
+    image: redis:latest
+    container_name: redis
+    restart: always
+    ports:
+      - 6379:6379
+  influxdb:
+    image: influxdb:latest
+    container_name: influxdb
+    restart: always
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb_data:/var/lib/influxdb
+  elasticsearch:
+    image: elasticsearch:8.10.1
+    container_name: elasticsearch
+    restart: always
+    ports:
+      - 9200:9200
+      - 9300:9300
+    environment:
+      xpack.security.enabled: "false"
+      discovery.type: "single-node" #单例模式
+      ingest.geoip.downloader.enabled: "false"
+      #锁定物理内存地址，防止es内存被交换出去，也就是避免es使用swap交换分区，频繁的交换，会导致IOPS变高
+      bootstrap.memory_lock: "true"
+      ES_JAVA_OPTS: "-Xms1g -Xmx1g" #堆内存大小
+      TZ: Asia/Shanghai
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+  skywalking-oap:
+    image: apache/skywalking-oap-server:9.6.0
+    container_name: skywalking-oap
+    restart: always
+    depends_on:
+      - elasticsearch
+    links:
+      - elasticsearch
+    ports:
+      - 11800:11800
+      - 12800:12800
+    environment:
+      SW_CORE_RECORD_DATA_TTL: 7 #记录数据的有效期，单位天
+      SW_CORE_METRICS_DATA_TTL: 7 #分析指标数据的有效期，单位天
+      SW_ENABLE_UPDATE_UI_TEMPLATE: "true" # 开启dashboard编辑修改功能
+      SW_HEALTH_CHECKER: default
+      TZ: Asia/Shanghai
+      SW_STORAGE: elasticsearch
+      JAVA_OPTS: "-Xms1024m -Xmx1024m"
+      #SW_STORAGE: elasticsearch7
+      SW_STORAGE_ES_CLUSTER_NODES: elasticsearch:9200
+  skywalking-ui:
+    image: apache/skywalking-ui:9.6.0
+    container_name: skywalking-ui
+    restart: always
+    depends_on:
+      - skywalking-oap
+    links:
+      - skywalking-oap
+    ports:
+      - 8080:8080
+    environment:
+      TZ: Asia/Shanghai
+      SW_HEALTH_CHECKER: default
+      SW_OAP_ADDRESS: http://skywalking-oap:12800
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    restart: always
+    ports:
+      - 3000:3000
+  kibana:
+    image: kibana:8.10.2
+    container_name: kibana
+    restart: always
+    ports:
+      - 5601:5601
+      - 9201:9200
+    depends_on:
+      - elasticsearch
+
+volumes:
+  mysql_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/mysql/data
+  influxdb_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/influxdb/data
+  elasticsearch_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /data/elasticsearch/data
+
