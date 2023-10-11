@@ -8,14 +8,15 @@
  */
 package ltd.newbee.mall.controller.common;
 
-import com.wf.captcha.SpecCaptcha;
-import com.wf.captcha.base.Captcha;
-import jakarta.servlet.ServletOutputStream;
+
+import io.springboot.captcha.SpecCaptcha;
+import io.springboot.captcha.base.Captcha;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ltd.newbee.mall.common.Constants;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+
 
 /**
  * @author 13
@@ -46,11 +47,7 @@ public class CommonController {
         httpServletRequest.getSession().setAttribute("verifyCode", captcha.text().toLowerCase());
 
         // 输出图片流
-        ServletOutputStream outputStream = httpServletResponse.getOutputStream();
         captcha.out(httpServletResponse.getOutputStream());
-        outputStream.flush();
-
-
     }
 
     @GetMapping("/common/mall/kaptcha")
