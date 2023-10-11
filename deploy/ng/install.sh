@@ -19,7 +19,7 @@ cp /etc/nginx/nginx.conf /etc/nginx/nginx.conf.bak
 cat > /etc/nginx/conf.d/default.conf <<EOF
 server {
     listen 80;
-    server_name example.com;
+    server_name mall.com;
 
     location / {
         root /usr/share/nginx/html;
