@@ -1,5 +1,4 @@
 #!/bin/bash
-https://corretto.aws/downloads/latest/amazon-corretto-17-x64-linux-jdk.tar.gz
 # 安装JDK 1.7 17.0.8.1
 wget https://download.oracle.com/java/17/archive/jdk-17.0.8_linux-x64_bin.tar.gz
 tar -xzf jdk-17.0.8_linux-x64_bin.tar.gz
