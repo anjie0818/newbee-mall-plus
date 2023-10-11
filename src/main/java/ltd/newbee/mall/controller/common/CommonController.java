@@ -64,7 +64,7 @@ public class CommonController {
         captcha.setCharType(Captcha.TYPE_DEFAULT);
 
         //设置字体
-        captcha.setCharType(Captcha.FONT_9);
+//        captcha.setCharType(Captcha.FONT_9);
 
         // 验证码存入session
         httpServletRequest.getSession().setAttribute(Constants.MALL_VERIFY_CODE_KEY, captcha.text().toLowerCase());
