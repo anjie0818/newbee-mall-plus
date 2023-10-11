@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# 安装验证码需要的字体
+yum install fontconfig
+fc-cache --force
 # 预定义脚本 springboot启动application.yml中使用
 DB_IP=127.0.0.1
 export mysql_host=$DB_IP
