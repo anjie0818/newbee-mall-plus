@@ -54,6 +54,7 @@ unzip -o upload.zip -d ~/
 echo "--->开始启动"
 
 nohup java -Xms512m -Xmx512m -Duser.timezone=GMT+8 -Dfile.encoding=utf-8 \
+  -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=1000 \
   -javaagent:./skywalking-agent/skywalking-agent.jar \
   -Dskywalking.agent.service_name=$app_name \
   -Dskywalking.agent.instance_name=$app_name-$export_port \
