@@ -4,6 +4,7 @@ yum install fontconfig
 fc-cache --force
 # 预定义脚本 springboot启动application.yml中使用
 DB_IP=127.0.0.1
+SERVICE_IP=8.140.32.229
 export mysql_host=$DB_IP
 export redis_host=$DB_IP
 export mysql_user=test
@@ -19,6 +20,7 @@ if [ -n "$2" ] ;then
 else
   export export_port=28079
 fi
+export server_url=http://$SERVICE_IP:$export_port
 
 if [ -n "$3" ] ;then
   export agent_port=$3
