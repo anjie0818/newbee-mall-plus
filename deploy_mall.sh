@@ -4,7 +4,7 @@ yum install fontconfig
 fc-cache --force
 # 预定义脚本 springboot启动application.yml中使用
 DB_IP=127.0.0.1
-SERVICE_IP=8.140.32.229
+SERVICE_IP=8.140.34.38
 export mysql_host=$DB_IP
 export redis_host=$DB_IP
 export mysql_user=test
@@ -52,7 +52,8 @@ echo "--->解压文件"
 unzip -o upload.zip -d ~/
 # 启动 springboot应用
 echo "--->开始启动"
-
+echo $PATH
+env
 nohup java -Xms512m -Xmx512m -Duser.timezone=GMT+8 -Dfile.encoding=utf-8 \
   -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:1000 \
   -javaagent:./skywalking-agent/skywalking-agent.jar \
