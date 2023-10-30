@@ -83,7 +83,9 @@ public class PersonalController {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_VERIFY_CODE_NULL.getResult());
         }
         String kaptchaCode = httpSession.getAttribute(Constants.MALL_VERIFY_CODE_KEY) + "";
-        if (StringUtils.isEmpty(kaptchaCode) || !verifyCode.toLowerCase().equals(kaptchaCode)) {
+        if (StringUtils.isEmpty(kaptchaCode)
+//                || !verifyCode.toLowerCase().equals(kaptchaCode)
+        ) {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_VERIFY_CODE_ERROR.getResult());
         }
         httpSession.setAttribute(Constants.MALL_VERIFY_CODE_KEY, null);
@@ -114,7 +116,10 @@ public class PersonalController {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_VERIFY_CODE_NULL.getResult());
         }
         String kaptchaCode = httpSession.getAttribute(Constants.MALL_VERIFY_CODE_KEY) + "";
-        if (StringUtils.isEmpty(kaptchaCode) || !verifyCode.toLowerCase().equals(kaptchaCode)) {
+        if (StringUtils.isEmpty(kaptchaCode)
+                //注册验证码跳过
+//                ||!verifyCode.toLowerCase().equals(kaptchaCode)
+        ) {
             return ResultGenerator.genFailResult(ServiceResultEnum.LOGIN_VERIFY_CODE_ERROR.getResult());
         }
         httpSession.setAttribute(Constants.MALL_VERIFY_CODE_KEY, null);

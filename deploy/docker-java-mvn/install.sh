@@ -32,3 +32,8 @@ sudo yum install -y docker-compose
 # 完成安装提示信息
 echo "JDK 1.7、Maven 3.6和最新版本的Docker已成功安装！"
 echo "请注销并重新登录以使更改生效。"
+
+# 创建容器目录
+mkdir /data/mysql/data  -p
+mkdir /data/influxdb/data -p
+mkdir /data/elasticsearch/data -p

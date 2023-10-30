@@ -12,6 +12,9 @@
 ## nginx
 * 执行shell
 * 配置反向代理
+## jmeter
+### mvn+jmeter集成
+### influence+grafana集成
 ```
 
 upstream backend {
