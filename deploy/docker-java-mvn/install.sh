@@ -28,6 +28,9 @@ sudo usermod -aG docker $USER
 # compose
 sudo yum install -y epel-release
 sudo yum install -y docker-compose
+# git
+sudo yum install -y git
+
 
 # 完成安装提示信息
 echo "JDK 1.7、Maven 3.6和最新版本的Docker已成功安装！"
