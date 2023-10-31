@@ -54,18 +54,18 @@ unzip -o upload.zip -d ~/
 echo "--->开始启动"
 echo $PATH
 env
-#nohup java -Xms512m -Xmx512m -Duser.timezone=GMT+8 -Dfile.encoding=utf-8 \
-#  -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:1000 \
-#  -javaagent:./skywalking-agent/skywalking-agent.jar \
-#  -Dskywalking.agent.service_name=$app_name \
-#  -Dskywalking.agent.instance_name=$app_name-$export_port \
-#  -Dskywalking.collector.backend_service=$DB_IP:11800 \
-#  -jar ./target/newbee-mall-plus.jar --server.port=$export_port \
-#  >>/dev/null 2>&1 &
-java -Xms512m -Xmx512m -Duser.timezone=GMT+8 -Dfile.encoding=utf-8 \
+nohup java -Xms512m -Xmx512m -Duser.timezone=GMT+8 -Dfile.encoding=utf-8 \
   -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:1000 \
   -javaagent:./skywalking-agent/skywalking-agent.jar \
   -Dskywalking.agent.service_name=$app_name \
   -Dskywalking.agent.instance_name=$app_name-$export_port \
   -Dskywalking.collector.backend_service=$DB_IP:11800 \
-  -jar ./target/newbee-mall-plus.jar --server.port=$export_port
+  -jar ./target/newbee-mall-plus.jar --server.port=$export_port \
+  >>/dev/null 2>&1 &
+#java -Xms512m -Xmx512m -Duser.timezone=GMT+8 -Dfile.encoding=utf-8 \
+#  -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:1000 \
+#  -javaagent:./skywalking-agent/skywalking-agent.jar \
+#  -Dskywalking.agent.service_name=$app_name \
+#  -Dskywalking.agent.instance_name=$app_name-$export_port \
+#  -Dskywalking.collector.backend_service=$DB_IP:11800 \
+#  -jar ./target/newbee-mall-plus.jar --server.port=$export_port
