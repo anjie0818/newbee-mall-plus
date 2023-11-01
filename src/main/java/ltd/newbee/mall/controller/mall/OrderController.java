@@ -214,6 +214,11 @@ public class OrderController {
     @ResponseBody
     public Result paySuccess(Integer payType, String orderNo, HttpServletRequest request) throws AlipayApiException {
         log.info("支付宝paySuccess通知数据记录：request.getParameterMap() is {}", JSON.toJSONString(request.getParameterMap()));
+        System.out.println("payType == 1"+(payType == 1));
+        System.out.println(" alipayConfig.getSigntype().equals(request.getParameter(\"sign_type\")"+( alipayConfig.getSigntype().equals(request.getParameter("sign_type"))));
+        System.out.println("\"trade_status_sync\".equals(request.getParameter(\"notify_type\"))"+"trade_status_sync".equals(request.getParameter("notify_type")));
+        System.out.println("alipayConfig.getAppId().equals(request.getParameter(\"app_id\")"+(alipayConfig.getAppId().equals(request.getParameter("app_id"))));
+        System.out.println("this.verifySign(request)"+(this.verifySign(request)));
         if (payType == 1 && alipayConfig.getSigntype().equals(request.getParameter("sign_type"))
                 && "trade_status_sync".equals(request.getParameter("notify_type"))
                 && alipayConfig.getAppId().equals(request.getParameter("app_id"))
